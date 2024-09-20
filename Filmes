@@ -1,0 +1,101 @@
+Claro! Aqui está o código completo e funcional para criar um site simples com Flask, exibindo a lista de filmes com um fundo preto.
+
+### Estrutura do Projeto:
+
+1. Crie uma pasta chamada `meu_site`.
+2. Dentro dela, crie o arquivo `app.py` e a pasta `templates`.
+3. Na pasta `templates`, crie o arquivo `index.html`.
+
+### Código para `app.py`:
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+# Lista de filmes com seus respectivos trailers
+filmes = [
+    {
+        "titulo": "O Lobo de Wall Street",
+        "link_trailer": "https://www.youtube.com/watch?v=5Z8Xy0jU0gE"
+    },
+    {
+        "titulo": "Velozes e Furiosos 6",
+        "link_trailer": "https://www.youtube.com/watch?v=4-6pQfY0F6o"
+    },
+    {
+        "titulo": "Percy Jackson: O Ladrão de Raios",
+        "link_trailer": "https://www.youtube.com/watch?v=YQk8jA5GxYI"
+    },
+    {
+        "titulo": "Tartarugas Ninjas",
+        "link_trailer": "https://www.youtube.com/watch?v=5uS3vyoYI5Y"
+    },
+    {
+        "titulo": "Jogos Vorazes",
+        "link_trailer": "https://www.youtube.com/watch?v=mfmrPu43Df8"
+    }
+]
+
+@app.route('/')
+def home():
+    return render_template('index.html', filmes=filmes)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### Código para `index.html` (dentro da pasta `templates`):
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist de Filmes</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        .filme {
+            margin: 20px 0;
+        }
+        a {
+            color: #00ccff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Playlist de Filmes</h1>
+    {% for filme in filmes %}
+        <div class="filme">
+            <h2>{{ filme.titulo }}</h2>
+            <a href="{{ filme.link_trailer }}" target="_blank">Assistir Trailer</a>
+        </div>
+    {% endfor %}
+</body>
+</html>
+```
+
+### Executando o Site:
+
+1. Navegue até a pasta `meu_site` no terminal.
+2. Execute o comando:
+   ```bash
+   python app.py
+   ```
+3. Abra seu navegador e acesse `http://127.0.0.1:5000`.
+
+Agora você terá um site funcional com a lista de filmes e os trailers acessíveis!
